@@ -29,8 +29,8 @@ def compile_code():
             with open(c_filename, 'w') as f:
                 f.write(code)
 
-            # Compile C code with -mconsole flag
-            compile_result = subprocess.run(['gcc', c_filename, '-o', executable_filename, '-mconsole'], capture_output=True, text=True)
+            # Compile C code without -mconsole flag
+            compile_result = subprocess.run(['gcc', c_filename, '-o', executable_filename], capture_output=True, text=True)
             if compile_result.returncode != 0:
                 return jsonify({'error': compile_result.stderr}), 400
 

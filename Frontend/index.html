@@ -4,43 +4,108 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Online IDE</title>
-    <!-- Bootstrap CSS -->
+    <title>Apex Editor</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="scripts.js"></script>
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.33.0/min/vs/loader.min.js"></script>
+    <link rel="icon" href="ide.ico" type="image/x-icon">
+    <style>
+        :root {
+            --bg-color: #f8f9fa;
+            --text-color: #212529;
+            --editor-bg-color: #ffffff;
+            --output-bg-color: #e9ecef;
+        }
 
+        [data-theme="dark"] {
+            --bg-color: #343a40;
+            --text-color: #ffffff;
+            --editor-bg-color: #1e1e1e;
+            --output-bg-color: #495057;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+        }
+
+        #codeEditor,
+        #outputArea {
+            background-color: var(--editor-bg-color);
+            color: var(--text-color);
+            border: 1px solid #ced4da;
+        }
+
+        #outputArea {
+            background-color: var(--output-bg-color);
+            resize: vertical;
+            overflow: auto;
+            min-height: 100px;
+            max-height: 500px;
+        }
+
+        .apex-heading {
+            background: #343a40;
+            color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            font-weight: 600;
+        }
+    </style>
 </head>
 
 <body>
     <div class="container py-5">
-        <h1 class="text-center mb-4">Online IDE</h1>
-
+        <h2 class="text-center mb-4 bg-dark text-light rounded p-4 apex-heading">Apex Editor</h2>
         <div class="row">
-            <div class="col-12 mb-3">
-                <select id="languageSelector" class="form-select">
-                    <option value="C">C</option>
-                    <option value="Java">Java</option>
-                    <option value="Python">Python</option>
-                </select>
+            <div class="col-md-12 mb-3">
+                <div class="d-flex justify-content-between button-bar">
+                    <div>
+                        <button id="downloadButton" class="btn btn-secondary me-2"><i class="fas fa-download"></i>
+                            Download </button>
+                        <button id="copyButton" class="btn btn-secondary me-2"><i class="fas fa-copy"></i> Copy
+                        </button>
+                    </div>
+                    <select id="languageSelector" class="form-select w-25">
+                        <option value="C">C</option>
+                        <option value="Java">Java</option>
+                        <option value="Python">Python</option>
+                    </select>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="modeSwitch">
+                        <label class="form-check-label" for="modeSwitch">Dark Mode</label>
+                    </div>
+                </div>
             </div>
-            <div class="col-12 mb-3">
-                <textarea id="codeEditor" class="form-control" rows="10"
-                    placeholder="Write your code here..."></textarea>
+            <div class="col-md-12 mb-3">
+                <div id="codeEditor" style="height: 400px;"></div>
             </div>
-            <div class="col-12 mb-3">
-                <button onclick="compileCode()" class="btn btn-primary">Run Code</button>
+            <div class="col-md-12 mb-3">
+                <button onclick="compileCode()" class="btn btn-success">Run Code</button>
             </div>
-            <div class="col-12">
-                <div id="outputArea" class="form-control" style="height: 100px; overflow-y: auto;">Output will be
-                    displayed here...</div>
+            <div class="col-md-12">
+                <div id="outputArea" class="form-control" style="height: 200px; overflow-y: auto;">
+                    Output will be displayed here...
+                </div>
+                <div id="resizer" class="resize-handle"></div>
             </div>
         </div>
     </div>
-
-    <!-- Bootstrap JS and dependencies -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.getElementById('modeSwitch').addEventListener('change', function (event) {
+            if (event.target.checked) {
+                document.body.setAttribute('data-theme', 'dark');
+            } else {
+                document.body.removeAttribute('data-theme');
+            }
+        });
+    </script>
+    <script src="scripts.js"></script>
 </body>
 
 </html>

@@ -1,0 +1,53 @@
+version: '3.8'
+
+services:
+  frontend:
+    image: my-frontend-app:latest
+    ports:
+      - "80:80"
+    deploy:
+      replicas: 2
+      update_config:
+        parallelism: 2
+        delay: 10s
+      restart_policy:
+        condition: none
+    networks:
+      - webnet
+
+  c_compiler:
+    image: apexplayground/c_compiler:latest
+    ports:
+      - "5002:5002"
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: none
+    networks:
+      - webnet
+
+  java_compiler:
+    image: apexplayground/java_compiler:latest
+    ports:
+      - "5001:5001"
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: none
+    networks:
+      - webnet
+
+  python_compiler:
+    image: apexplayground/python_compiler:latest
+    ports:
+      - "5000:5000"
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: none
+    networks:
+      - webnet
+
+networks:
+  webnet:
+    driver: overlay
