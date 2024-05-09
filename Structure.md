@@ -1,0 +1,32 @@
+```
+└── 📁ET_WebIDE
+    └── .gitignore
+    └── 📁Backend
+        └── 📁c_compiler
+            └── app.py
+            └── Dockerfile
+            └── requirements.txt
+            └── 📁__pycache__
+                └── app.cpython-312.pyc
+                └── app.cpython-39.pyc
+        └── 📁java_compiler
+            └── app.py
+            └── Dockerfile
+            └── requirements.txt
+            └── 📁__pycache__
+                └── app.cpython-312.pyc
+                └── app.cpython-39.pyc
+        └── 📁python_compiler
+            └── app.py
+            └── Dockerfile
+            └── requirements.txt
+            └── 📁__pycache__
+                └── app.cpython-312.pyc
+                └── app.cpython-39.pyc
+    └── docker-compose.yml
+    └── 📁Frontend
+        └── Dockerfile
+        └── ide.ico
+        └── index.html
+        └── scripts.js
+```
