@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   frontend:
-    image: my-frontend-app:latest
+    image: apexplayground/my-frontend-app:latest
     ports:
       - "80:80"
     deploy:
